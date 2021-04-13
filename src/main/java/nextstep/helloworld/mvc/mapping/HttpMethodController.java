@@ -11,11 +11,13 @@ import java.util.List;
 @RestController
 public class HttpMethodController {
 
+    @PostMapping(path = "/http-method/users", consumes = "application/json")
     public ResponseEntity createUser(@RequestBody User user) {
         Long id = 1L;
         return ResponseEntity.created(URI.create("/users/" + id)).build();
     }
 
+    @GetMapping("/http-method/users")
     public ResponseEntity<List<User>> showUser() {
         List<User> users = Arrays.asList(
                 new User("이름", "email"),
