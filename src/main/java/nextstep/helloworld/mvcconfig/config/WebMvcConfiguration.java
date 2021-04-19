@@ -1,5 +1,6 @@
 package nextstep.helloworld.mvcconfig.config;
 
+import nextstep.helloworld.mvcconfig.ui.AuthenticationPrincipalArgumentResolver;
 import nextstep.helloworld.mvcconfig.ui.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor());
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/admin/**");
     }
 
     /**
@@ -40,5 +41,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(new AuthenticationPrincipalArgumentResolver());
     }
 }
